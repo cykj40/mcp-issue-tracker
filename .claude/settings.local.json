@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"c:\\Users\\cyrus\\AppData\\Roaming\\Claude\\logs\\mcp-server-issues-server.log\" -Tail 50)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
