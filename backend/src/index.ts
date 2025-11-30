@@ -29,7 +29,7 @@ export async function buildApp(
     origin: ["http://localhost:5173", "http://localhost:5174"], // Vite dev server
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "x-api-key"],
   });
 
   // Register BetterAuth routes with custom sign-up handling
@@ -298,12 +298,18 @@ export async function buildApp(
 }
 
 // Start the server if this file is run directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  try {
-    const app = await buildApp();
-    await app.listen({ port: 3000, host: "0.0.0.0" });
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
+if (import.meta.url.startsWith('file:')) {
+  const modulePath = process.argv[1];
+  if (!modulePath || modulePath.includes('index.ts') || modulePath.includes('index.js')) {
+    try {
+      const app = await buildApp();
+      const port = Number(process.env.PORT) || 3000;
+      const host = process.env.HOST || "0.0.0.0";
+      await app.listen({ port, host });
+      console.log(`🚀 Server ready at http://localhost:${port}`);
+    } catch (err) {
+      console.error(err);
+      process.exit(1);
+    }
   }
 }

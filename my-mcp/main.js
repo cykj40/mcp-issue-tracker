@@ -7,6 +7,8 @@ import {
 import sqlite3 from 'sqlite3';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import apiBasedTools from './api-based-tools.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,8 +19,11 @@ const server = new Server({
 }, {
     capabilities: {
         resources: {},
+        tools: {},
     }
 });
+
+apiBasedTools(server);
 
 server.setRequestHandler(ListResourcesRequestSchema, async () => {
     return {

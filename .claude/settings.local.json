@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(Get-Content \"c:\\Users\\cyrus\\AppData\\Roaming\\Claude\\logs\\mcp-server-issues-server.log\" -Tail 50)"
+      "Bash(Get-Content \"c:\\Users\\cyrus\\AppData\\Roaming\\Claude\\logs\\mcp-server-issues-server.log\" -Tail 50)",
+      "Bash(node --version:*)",
+      "Bash(npm:*)",
+      "Bash(timeout 10 du:*)",
+      "Bash(Get-Content \"C:\\Users\\cyrus\\AppData\\Roaming\\Claude\\claude_desktop_config.json\" -ErrorAction SilentlyContinue)",
+      "Bash(cat:*)",
+      "Bash(curl:*)",
+      "Bash(npx tsx:*)",
+      "WebSearch",
+      "WebFetch(domain:www.better-auth.com)",
+      "Bash(node generate-api-key.js:*)"
     ],
     "deny": [],
     "ask": []
